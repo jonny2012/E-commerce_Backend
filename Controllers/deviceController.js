@@ -66,10 +66,11 @@ class deviceController {
             if (info) {
                 info = JSON.parse(info)
                 info.forEach(element => DeviceInfo.create({
-                    title: element.title,
-                    description: element.description,
-                    deviceId: device.id
-                }));
+                                                             title: element.title,
+                                                             description: element.description,
+                                                             deviceId: device.id
+                                                          })
+                            );
             }
             img.mv(path.resolve(__dirname, "..", "static", filename))
             res.json(device)

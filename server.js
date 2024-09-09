@@ -2,7 +2,7 @@ import express from "express"
 import cors from "cors"
 import dotenv from "dotenv"
 import { sequelize } from "./db.js"
-import { router } from "./Routers/index.js"
+import { router } from "./routers/index.js"
 import fileUpload from "express-fileupload"
 import { errorHandler } from "./middleware/ErrorHandlingMiddleware.js"
 dotenv.config()

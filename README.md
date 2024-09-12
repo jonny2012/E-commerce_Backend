@@ -27,4 +27,3 @@ Steps to run this express server
 4. check .env_example file  and create new dotenv file .env with
  same constants, but change db constants values with yours values
 5. npm run dev  -- to run server
-6. You can make requests to endpoints  in  Postman

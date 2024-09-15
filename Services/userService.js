@@ -10,9 +10,8 @@ class Service {
     const users = await User.findAll();
     return users;
   }
-  async createUser(email, cryptedPassword, role) {
-    console.log(role);
-    const user = await User.create({ email, password: cryptedPassword, role });
+  async createUser(username,email, cryptedPassword, role) {
+    const user = await User.create({username, email, password: cryptedPassword, role });
     return user;
   }
 

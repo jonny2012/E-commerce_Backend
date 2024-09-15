@@ -6,15 +6,16 @@ import jwt from "jsonwebtoken";
 
 class userController {
   async createUser(req, res, next) {
-    const { email, password, role } = req.body;
+    const {username, email, password, role } = req.body;
     try {
       const user = await userService.getOneUser(email);
       if (user) {
-        next(ApiError.unauthorized("Email is already registered"));
+        next(ApiError.badRequest("Email is already registered"));
         return;
       }
       const cryptedpassword = await bcrypt.hash(password, 3);
       const newUser = await userService.createUser(
+        username,
         email,
         cryptedpassword,
         role

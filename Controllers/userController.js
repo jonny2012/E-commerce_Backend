@@ -6,8 +6,10 @@ import jwt from "jsonwebtoken";
 
 class userController {
   async createUser(req, res, next) {
-    const {username, email, password, role } = req.body;
+    const { username, email, password, role } = req.body;
+    console.log(req.body)
     try {
+      console.log(req.body);
       const user = await userService.getOneUser(email);
       if (user) {
         next(ApiError.badRequest("Email is already registered"));

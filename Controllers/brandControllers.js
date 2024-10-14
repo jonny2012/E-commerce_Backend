@@ -13,8 +13,8 @@ class brandController {
 
   async createBrand(req, res) {
     try {
-      const type = await brandService.createBrand(req.body.name);
-      res.json(type);
+      const brand= await brandService.createBrand(req.body.name);
+      res.json(brand);
     } catch (err) {
       console.log(err);
     }

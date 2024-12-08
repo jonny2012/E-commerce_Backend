@@ -3,7 +3,7 @@
 
  Description: REST Api-server based on OOP-programing style  
              with  authorization, registration, tokens, static-files-save,
-             database comunicate, 10+ routes, middlewares,
+             database comunication, 10+ routes, middlewares,
              crypted-user-data
 
 Api Server: express

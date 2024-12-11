@@ -4,8 +4,8 @@ import typeService from "../Services/typeService.js";
 class typeController {
   async getAll(req, res) {
     try {
-      const types = await typeService.getTypes()
-      res.json(types)
+      const types = await typeService.getTypes();
+      res.json(types);
     } catch (err) {
       throw new Error(err);
     }

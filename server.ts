@@ -1,10 +1,10 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import { sequelize } from "./db.js";
-import { router } from "./routers/index.js";
+import { sequelize } from "./db.ts";
+import { router } from "./routers/index.ts";
 import fileUpload from "express-fileupload";
-import { errorHandler } from "./middleware/ErrorHandlingMiddleware.js";
+import { errorHandler } from "./middleware/ErrorHandlingMiddleware.ts";
 dotenv.config();
 
 const port = process.env.PORT;

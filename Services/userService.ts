@@ -1,4 +1,4 @@
-import { User } from "../models/models.js";
+import { User } from "../models/models.ts";
 
 class Service {
   async getOneUser(email) {
@@ -10,8 +10,13 @@ class Service {
     const users = await User.findAll();
     return users;
   }
-  async createUser(username,email, cryptedPassword, role) {
-    const user = await User.create({username, email, password: cryptedPassword, role });
+  async createUser(username, email, cryptedPassword, role) {
+    const user = await User.create({
+      username,
+      email,
+      password: cryptedPassword,
+      role,
+    });
     return user;
   }
 
@@ -22,8 +27,7 @@ class Service {
 
   async updateUserInfo(userData, userId) {
     const updatedData = await User.update(
-      { name: userData.name, 
-        email: userData.email },
+      { name: userData.name, email: userData.email },
       { where: { id: userId } }
     );
     return updatedData;

@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import ApiError from "../errors/ApiError.js";
+import ApiError from "../errors/ApiError.ts";
 
 export function authMiddleware(req, res, next) {
   if (req.method === "OPTIONS") {

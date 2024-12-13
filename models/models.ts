@@ -1,4 +1,4 @@
-import { sequelize } from "../db.js";
+import { sequelize } from "../db.ts";
 import { DataTypes } from "sequelize";
 
 const User = sequelize.define("user", {
@@ -48,6 +48,7 @@ const DeviceInfo = sequelize.define("device_info", {
   Image2: { type: DataTypes.STRING, allowNull: false },
   Image3: { type: DataTypes.STRING, allowNull: false },
   Image4: { type: DataTypes.STRING },
+  deviceId: { type: DataTypes.STRING, allowNull: false },
 });
 
 const TypeBrand = sequelize.define("type_brand", {

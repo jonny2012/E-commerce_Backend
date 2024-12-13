@@ -1,8 +1,19 @@
 import jwt from "jsonwebtoken";
-import ApiError from "../errors/ApiError.js";
+import ApiError from "../errors/ApiError.ts";
+import { NextFunction, Request, Response } from "express";
+import { JwtPayload } from "jsonwebtoken";
+interface JWTPayload {
+  id: string;
+  email: string;
+  role: string;
+}
 
-export function checkRoleMiddleware(role) {
-  return function (req, res, next) {
+export interface CustomRequest extends Request {
+  user?: JwtPayload | string;
+}
+
+export function checkRoleMiddleware(role: string) {
+  return function (req: CustomRequest, res: Response, next: NextFunction) {
     if (req.method === "OPTIONS") {
       next();
     }
@@ -13,7 +24,7 @@ export function checkRoleMiddleware(role) {
       }
       const decoded = jwt.verify(token, process.env.SECRET_KEY);
       console.log(decoded);
-      if (decoded.role !== role) {
+      if (decoded) {
         return next(ApiError.unauthorized("No access"));
       }
       req.user = decoded;

@@ -1,5 +1,5 @@
-import ApiError from "../errors/ApiError.js";
-import brandService from "../Services/brandService.js";
+import ApiError from "../errors/ApiError.ts";
+import brandService from "../Services/brandService.ts";
 
 class brandController {
   async getBrands(req, res, next) {
@@ -13,7 +13,7 @@ class brandController {
 
   async createBrand(req, res) {
     try {
-      const brand= await brandService.createBrand(req.body.name);
+      const brand = await brandService.createBrand(req.body.name);
       res.json(brand);
     } catch (err) {
       console.log(err);

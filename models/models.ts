@@ -1,6 +1,14 @@
 import { sequelize } from "../db.ts";
 import { DataTypes } from "sequelize";
 
+export interface IUser {
+  id: number;
+  username: string;
+  email: string;
+  password: string;
+  role: string;
+}
+
 const User = sequelize.define("user", {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
   username: { type: DataTypes.STRING, allowNull: false },
@@ -8,6 +16,7 @@ const User = sequelize.define("user", {
   password: { type: DataTypes.STRING, allowNull: false },
   role: { type: DataTypes.STRING, defaultValue: "USER" },
 });
+const user = sequelize.model("user");
 
 const Basket = sequelize.define("basket", {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },

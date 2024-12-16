@@ -1,12 +1,4 @@
 import { integer, pgTable, text, varchar } from "drizzle-orm/pg-core";
-import { db } from "./index.ts";
-
-export const adminTable = pgTable("admin", {
-  id: integer().primaryKey().generatedAlwaysAsIdentity(),
-  name: varchar({ length: 255 }).notNull(),
-  age: integer().notNull(),
-  email: varchar({ length: 255 }).notNull().unique(),
-});
 
 export const userTable = pgTable("users", {
   id: integer("id").primaryKey().generatedAlwaysAsIdentity(),

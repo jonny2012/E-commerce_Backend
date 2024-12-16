@@ -9,7 +9,7 @@ interface JWTPayload {
 }
 
 export interface CustomRequest extends Request {
-  user?: JwtPayload | string;
+  user: JwtPayload | any;
 }
 
 export function checkRoleMiddleware(role: string) {

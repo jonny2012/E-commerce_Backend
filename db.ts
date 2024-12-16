@@ -1,15 +1,11 @@
+import { drizzle } from "drizzle-orm/node-postgres";
+import { Pool } from "pg";
+const pool = new Pool({
+  host: "localhost",
+  port: 5432,
+  user: "postgres",
+  password: "admin",
+  database: "test",
+});
 
-import { Sequelize } from "sequelize";
-import dotenv from "dotenv"
-dotenv.config()
-
-
-export const sequelize = new Sequelize(
-    process.env.DB_NAME,
-    process.env.DB_USER,
-    process.env.DB_PASSWORD,
-    {
-        dialect:"mysql",
-        host:process.env.HOST
-    }
-)
+export const db = drizzle(pool, { logger: true });

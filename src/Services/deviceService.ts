@@ -1,21 +1,19 @@
-// import { Device } from "../models/models.ts";
+import { db } from "../db";
+import { devicesTable } from "../db/schema";
 
-// class deviceService {
-//   async createDevice(
-//     name: string,
-//     price: number,
-//     brandId: number,
-//     typeId: number,
-//     filename: string
-//   ) {
-//     const device = await Device.create({
-//       name,
-//       price,
-//       brandId,
-//       typeId,
-//       img: filename,
-//     });
-//     return device;
-//   }
-// }
-// export default new deviceService();
+class deviceService {
+  async createDevice(
+    deviceName: string,
+    price: number,
+    brandId: number,
+    typeId: number,
+    rating: number
+  ) {
+    const device = await db.insert(devicesTable).values({
+      deviceName,
+      price,
+    });
+    return device;
+  }
+}
+export default new deviceService();

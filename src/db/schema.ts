@@ -15,9 +15,11 @@ export const basketsTable = pgTable("baskets", {
 
 export const devicesTable = pgTable("devices", {
   id: integer("id").primaryKey().generatedAlwaysAsIdentity().notNull(),
-  deviceName: text("name").notNull(),
+  deviceName: text("device_name").notNull(),
   price: integer("price").notNull(),
   rating: integer("rating").notNull().default(0),
+  brandId: integer("brand_id").references(() => brandTable.id),
+  typeId: integer("type_id").references(() => typeTable.id),
 });
 
 export const basketDeviceTable = pgTable("basketDevices", {

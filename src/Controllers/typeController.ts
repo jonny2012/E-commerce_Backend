@@ -1,12 +1,12 @@
-import { db } from "../db/index.js";
-import typeService from "../Services/typeService.js";
+import { db } from "../db/index.ts";
+import typeService from "../Services/typeService.ts";
 import ApiError from "../errors/ApiError";
 import { Request, Response, NextFunction } from "express";
-import { typeTable } from "../db/schema.js";
+import { typeTable } from "../db/schema.ts";
 import { eq } from "drizzle-orm";
 
 class typeController {
-  async getAll(req: Request, res: Response, next: NextFunction) {
+  async getAll(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const types = await typeService.getTypes();
 

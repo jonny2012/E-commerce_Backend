@@ -1,14 +1,13 @@
-// import { Brand } from "../models/models.ts";
-
-// class brandService {
-//   async createBrand(name) {
-//     const newBrand = await Brand.create({ name });
-//     return newBrand;
-//   }
-
-//   async getAllBrands() {
-//     const brands = await Brand.findAll();
-//     return brands;
-//   }
-// }
-// export default new brandService();
+import { db } from "../db";
+import { brandTable } from "../db/schema";
+class brandService {
+  async createBrand(name: string) {
+    const newBrand = await db.insert(brandTable).values({ name }).returning();
+    return newBrand;
+  }
+  async getAllBrands() {
+    const brands = await db.query.brandTable.findMany();
+    return brands;
+  }
+}
+export default new brandService();

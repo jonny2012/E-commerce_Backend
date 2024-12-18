@@ -1,7 +1,6 @@
 import ApiError from "../errors/ApiError.ts";
 import * as bcrypt from "bcrypt";
 import userService from "../Services/userService.ts";
-
 import jwt from "jsonwebtoken";
 import { NextFunction, Request, Response } from "express";
 import { CustomRequest } from "../middleware/checkRoleMiddleware.ts";
@@ -56,10 +55,8 @@ class userController {
       next(ApiError.unauthorized(err.message));
     }
   }
-
   async checkAuth(req: CustomRequest, res: Response, next: NextFunction) {
     const user = req.user;
-
     try {
       const token = jwt.sign(
         { id: user.id, email: user.email, role: user.role },

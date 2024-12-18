@@ -7,7 +7,6 @@ export const userTable = pgTable("users", {
   password: text("password").notNull(),
   role: text("role").default("USER"),
 });
-
 export const basketsTable = pgTable("baskets", {
   id: integer("id").primaryKey().generatedAlwaysAsIdentity(),
   userId: integer("user_id").references(() => userTable.id),
@@ -20,6 +19,7 @@ export const devicesTable = pgTable("devices", {
   rating: integer("rating").notNull().default(0),
   brandId: integer("brand_id").references(() => brandTable.id),
   typeId: integer("type_id").references(() => typeTable.id),
+  deviceInfoId: integer("device_info_id").references(() => deviceInfoTable.id),
 });
 
 export const basketDeviceTable = pgTable("basketDevices", {
@@ -52,6 +52,7 @@ export const deviceInfoTable = pgTable("device_info", {
   image2: text("image2").notNull(),
   image3: text("image3"),
   image4: text("image4"),
+  deviceId: integer("device_id").references(() => devicesTable.id),
 });
 
 export const typeBrandsTable = pgTable("type_brands", {

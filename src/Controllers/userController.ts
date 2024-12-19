@@ -12,7 +12,7 @@ class userController {
     const { username, email, password } = req.body;
     try {
       const user = await userService.getOneUser(email);
-      console.log(user);
+
       if (user) {
         next(ApiError.badRequest("Email is already registered"));
         return;
@@ -23,14 +23,13 @@ class userController {
         email,
         cryptedpassword
       );
-      console.log(newUser);
+
       const basket = await db
         .insert(basketsTable)
         .values({ userId: newUser[0].id });
       res.json({ message: "User successfull registred" });
     } catch (err) {
       next(ApiError.badRequest(err));
-      console.log(err);
     }
   }
   async login(req: Request, res: Response, next: NextFunction) {

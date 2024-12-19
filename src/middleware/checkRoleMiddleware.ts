@@ -22,12 +22,12 @@ export function checkRoleMiddleware(role: string) {
       if (!token) {
         res.status(401).json({ message: "Unautorized" });
       }
-      const decoded = jwt.verify(token, process.env.SECRET_KEY);
-      console.log(decoded);
-      if (decoded) {
+      const isDecoded = jwt.verify(token, process.env.SECRET_KEY);
+
+      if (!isDecoded) {
         return next(ApiError.unauthorized("No access"));
       }
-      req.user = decoded;
+      req.user = isDecoded;
 
       next();
     } catch (err) {

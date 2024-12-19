@@ -13,6 +13,15 @@ export const users = pgTable("users", {
 	unique("users_email_unique").on(table.email),
 ]);
 
+export const devices = pgTable("devices", {
+	id: integer().primaryKey().generatedAlwaysAsIdentity({ name: "devices_id_seq", startWith: 1, increment: 1, minValue: 1, maxValue: 2147483647, cache: 1 }),
+	deviceName: text("device_name").notNull(),
+	price: integer().notNull(),
+	rating: integer().default(0).notNull(),
+	brandId: integer("brand_id"),
+	typeId: integer("type_id"),
+});
+
 export const basketDevices = pgTable("basketDevices", {
 	id: serial().primaryKey().notNull(),
 	basketId: integer("basket_id"),
@@ -37,13 +46,6 @@ export const deviceInfo = pgTable("device_info", {
 	image2: text().notNull(),
 	image3: text(),
 	image4: text(),
-});
-
-export const devices = pgTable("devices", {
-	id: serial().primaryKey().notNull(),
-	name: text().notNull(),
-	price: integer().notNull(),
-	rating: integer().default(0).notNull(),
 });
 
 export const rating = pgTable("rating", {

@@ -1,2 +1,0 @@
-ALTER TABLE "devices" ADD COLUMN "device_info_id" integer;--> statement-breakpoint
-ALTER TABLE "devices" ADD CONSTRAINT "devices_device_info_id_device_info_id_fk" FOREIGN KEY ("device_info_id") REFERENCES "public"."device_info"("id") ON DELETE no action ON UPDATE no action;l

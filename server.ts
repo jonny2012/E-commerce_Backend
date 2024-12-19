@@ -9,7 +9,7 @@ import { users } from "./drizzle/schema.ts";
 import { userTable } from "./src/db/schema.ts";
 dotenv.config();
 
-const port = process.env.PORT;
+const port = process.env.API_DEV_PORT;
 const app = express();
 app.use(cors());
 

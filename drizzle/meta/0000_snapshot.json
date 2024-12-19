@@ -1,5 +1,5 @@
 {
-  "id": "74d4a9a9-90b3-4e6a-aec0-c7c74cb07e50",
+  "id": "a54dc9a5-9dc7-4b3c-8651-1af25e7bd25f",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -215,10 +215,30 @@
           "type": "text",
           "primaryKey": false,
           "notNull": false
+        },
+        "device_id": {
+          "name": "device_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
         }
       },
       "indexes": {},
-      "foreignKeys": {},
+      "foreignKeys": {
+        "device_info_device_id_devices_id_fk": {
+          "name": "device_info_device_id_devices_id_fk",
+          "tableFrom": "device_info",
+          "tableTo": "devices",
+          "columnsFrom": [
+            "device_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
       "policies": {},
@@ -246,8 +266,8 @@
             "cycle": false
           }
         },
-        "name": {
-          "name": "name",
+        "device_name": {
+          "name": "device_name",
           "type": "text",
           "primaryKey": false,
           "notNull": true
@@ -264,10 +284,68 @@
           "primaryKey": false,
           "notNull": true,
           "default": 0
+        },
+        "brand_id": {
+          "name": "brand_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "type_id": {
+          "name": "type_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "device_info_id": {
+          "name": "device_info_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
         }
       },
       "indexes": {},
-      "foreignKeys": {},
+      "foreignKeys": {
+        "devices_brand_id_brands_id_fk": {
+          "name": "devices_brand_id_brands_id_fk",
+          "tableFrom": "devices",
+          "tableTo": "brands",
+          "columnsFrom": [
+            "brand_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "devices_type_id_types_id_fk": {
+          "name": "devices_type_id_types_id_fk",
+          "tableFrom": "devices",
+          "tableTo": "types",
+          "columnsFrom": [
+            "type_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "devices_device_info_id_device_info_id_fk": {
+          "name": "devices_device_info_id_device_info_id_fk",
+          "tableFrom": "devices",
+          "tableTo": "device_info",
+          "columnsFrom": [
+            "device_info_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
       "policies": {},

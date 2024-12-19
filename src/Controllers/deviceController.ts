@@ -2,10 +2,8 @@ import ApiError from "../errors/ApiError";
 import * as uuid from "uuid";
 import * as path from "path";
 import deviceService from "../Services/deviceService";
-import { devicesTable, deviceInfoTable } from "../db/schema.ts";
 import { NextFunction, Request, Response } from "express";
-import { db } from "../db";
-import { eq, and } from "drizzle-orm";
+
 class DeviceController {
   async getDevices(
     req: Request,
@@ -17,14 +15,13 @@ class DeviceController {
         string,
         string | undefined
       >;
-      const devices = await db.query.devicesTable.findMany();
+      const devices = await deviceService.getAllDevices();
 
       res.json(devices);
     } catch (err: any) {
       next(ApiError.badRequest(err.message));
     }
   }
-
   async getDeviceById(
     req: Request,
     res: Response,
@@ -32,10 +29,7 @@ class DeviceController {
   ): Promise<void> {
     const { reqDeviceId } = req.params;
     try {
-      const device = await db
-        .select()
-        .from(devicesTable)
-        .where(eq(devicesTable.id, Number(reqDeviceId)));
+      const device = await deviceService.getDeviceById(Number(reqDeviceId));
       res.json(device);
     } catch (err: any) {
       next(ApiError.badRequest(err.message));
@@ -48,13 +42,17 @@ class DeviceController {
     next: NextFunction
   ): Promise<void> {
     try {
-      const { deviceName, price, brandId, typeId } = req.body;
+      const { deviceName, price, brandId, typeId, rating } = req.body;
       const { img } = req.files as { img: any };
-      const filename = uuid.v4() + ".jpg";
+      const filename = uuid.v4();
 
-      const device = await db
-        .insert(devicesTable)
-        .values({ deviceName, price, brandId, typeId });
+      const device = deviceService.createDevice(
+        deviceName,
+        price,
+        brandId,
+        typeId,
+        rating
+      );
       if (!device) {
         res.status(404).json({ message: "Device not found" });
         return;

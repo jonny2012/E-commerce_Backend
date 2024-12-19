@@ -17,7 +17,7 @@ class Service {
       .select()
       .from(userTable)
       .where(eq(userTable.email, email));
-    return user.length > 0 ? user[0] : null;
+    return user[0] ?? null;
   }
 
   async getAllUsers() {

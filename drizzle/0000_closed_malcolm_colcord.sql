@@ -21,14 +21,18 @@ CREATE TABLE "device_info" (
 	"image1" text NOT NULL,
 	"image2" text NOT NULL,
 	"image3" text,
-	"image4" text
+	"image4" text,
+	"device_id" integer
 );
 --> statement-breakpoint
 CREATE TABLE "devices" (
 	"id" integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY (sequence name "devices_id_seq" INCREMENT BY 1 MINVALUE 1 MAXVALUE 2147483647 START WITH 1 CACHE 1),
-	"name" text NOT NULL,
+	"device_name" text NOT NULL,
 	"price" integer NOT NULL,
-	"rating" integer DEFAULT 0 NOT NULL
+	"rating" integer DEFAULT 0 NOT NULL,
+	"brand_id" integer,
+	"type_id" integer,
+	"device_info_id" integer
 );
 --> statement-breakpoint
 CREATE TABLE "rating" (
@@ -61,6 +65,10 @@ CREATE TABLE "users" (
 ALTER TABLE "basketDevices" ADD CONSTRAINT "basketDevices_basket_id_baskets_id_fk" FOREIGN KEY ("basket_id") REFERENCES "public"."baskets"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "basketDevices" ADD CONSTRAINT "basketDevices_device_id_devices_id_fk" FOREIGN KEY ("device_id") REFERENCES "public"."devices"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "baskets" ADD CONSTRAINT "baskets_user_id_users_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."users"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "device_info" ADD CONSTRAINT "device_info_device_id_devices_id_fk" FOREIGN KEY ("device_id") REFERENCES "public"."devices"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "devices" ADD CONSTRAINT "devices_brand_id_brands_id_fk" FOREIGN KEY ("brand_id") REFERENCES "public"."brands"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "devices" ADD CONSTRAINT "devices_type_id_types_id_fk" FOREIGN KEY ("type_id") REFERENCES "public"."types"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "devices" ADD CONSTRAINT "devices_device_info_id_device_info_id_fk" FOREIGN KEY ("device_info_id") REFERENCES "public"."device_info"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "rating" ADD CONSTRAINT "rating_user_id_users_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."users"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "rating" ADD CONSTRAINT "rating_device_id_devices_id_fk" FOREIGN KEY ("device_id") REFERENCES "public"."devices"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "type_brands" ADD CONSTRAINT "type_brands_type_id_types_id_fk" FOREIGN KEY ("type_id") REFERENCES "public"."types"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
